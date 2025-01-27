@@ -7,12 +7,10 @@ import { ErrInfo } from "@/types/speller";
 
 export default function Home() {
   const [text, setText] = useState('');
-  const [fixedText, setFixedText] = useState('');
   const [errors, setErrors] = useState<ErrInfo[]>([]);
 
   const handleCheck = async (newText: string) => {
     setText(newText);
-    setFixedText(newText);
     await checkSpelling(newText);
   };
 
@@ -38,7 +36,6 @@ export default function Home() {
           error.candWord + 
           correctedText.slice(error.end);
       }
-      setFixedText(correctedText);
     } catch (error) {
       console.error('Error checking spelling:', error);
     }
@@ -49,7 +46,6 @@ export default function Home() {
     const afterText = text.slice(end);
     const updatedText = beforeText + newText + afterText;
     setText(updatedText);
-    setFixedText(updatedText);
     
     // 현재 에러에서 수정된 에러 제거
     const updatedErrors = errors.filter(error => 

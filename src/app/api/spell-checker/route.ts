@@ -9,6 +9,14 @@ function encodeFormData(data: Record<string, string>): string {
         .join('&');
 }
 
+interface SpellError {
+    start: number;
+    end: number;
+    help: string;
+    candWord: string;
+    orgStr: string;
+}
+
 export async function POST(request: Request) {
     try {
         const data = await request.json();
@@ -32,7 +40,7 @@ export async function POST(request: Request) {
         const rawData = responseText.substring(startIndex + 7, nextIndex + 2);
         const errorData = JSON.parse(rawData);
 
-        const errors = errorData[0]?.errInfo?.map((match: any) => ({
+        const errors = errorData[0]?.errInfo?.map((match: SpellError) => ({
             start: match.start,
             end: match.end,
             help: match.help,

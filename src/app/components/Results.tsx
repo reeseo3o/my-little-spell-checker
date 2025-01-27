@@ -13,10 +13,10 @@ export default function Results({ errors, originalText, onFix }: ResultsProps) {
   if (!errors || errors.length === 0) return null;
 
   const renderText = () => {
-    let result = [];
+    const result = [];
     let lastIndex = 0;
 
-    errors.forEach((error, index) => {
+    errors.forEach((error) => {
       // 현재 에러 이전의 일반 텍스트
       result.push(originalText.slice(lastIndex, error.start));
       
