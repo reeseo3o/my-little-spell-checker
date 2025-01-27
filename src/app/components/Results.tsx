@@ -6,10 +6,9 @@ import { htmlToString } from '@/utils/html';
 interface ResultsProps {
   errors: ErrInfo[];
   originalText: string;
-  onFix: (start: number, end: number, newText: string) => void;
 }
 
-export default function Results({ errors, originalText, onFix }: ResultsProps) {
+export default function Results({ errors, originalText }: ResultsProps) {
   if (!errors || errors.length === 0) return null;
 
   const renderText = () => {
@@ -17,29 +16,49 @@ export default function Results({ errors, originalText, onFix }: ResultsProps) {
     let lastIndex = 0;
 
     errors.forEach((error) => {
-      // 현재 에러 이전의 일반 텍스트
       result.push(originalText.slice(lastIndex, error.start));
-      
-      // 수정된 부분
       result.push(
         <span key={error.start} className="bg-green-200 dark:bg-green-900 px-1 rounded">
           {error.candWord}
         </span>
       );
-      
       lastIndex = error.end;
     });
 
-    // 마지막 에러 이후의 텍스트
     result.push(originalText.slice(lastIndex));
-
     return result;
+  };
+
+  const handleCopy = async () => {
+    try {
+      let correctedText = originalText;
+      errors.forEach((error) => {
+        correctedText = 
+          correctedText.slice(0, error.start) + 
+          error.candWord + 
+          correctedText.slice(error.end);
+      });
+      
+      await navigator.clipboard.writeText(correctedText);
+      alert('수정된 텍스트가 클립보드에 복사되었습니다.');
+    } catch (err) {
+      console.error('클립보드 복사 실패:', err);
+      alert('클립보드 복사에 실패했습니다.');
+    }
   };
 
   return (
     <div className="w-full max-w-2xl space-y-8">
       <div>
-        <h2 className="text-xl font-bold mb-4">수정된 텍스트</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold">수정된 텍스트</h2>
+          <button
+            onClick={handleCopy}
+            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+          >
+            클립보드에 복사
+          </button>
+        </div>
         <pre className="whitespace-pre-wrap p-4 border rounded-lg bg-background">
           {renderText()}
         </pre>
@@ -55,12 +74,6 @@ export default function Results({ errors, originalText, onFix }: ResultsProps) {
               <p className="text-sm text-gray-500 mt-2">
                 {error.help && htmlToString(error.help)}
               </p>
-              <button
-                onClick={() => onFix(error.start, error.end, error.candWord)}
-                className="mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-              >
-                수정하기
-              </button>
             </div>
           ))}
         </div>
