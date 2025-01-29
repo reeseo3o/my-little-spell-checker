@@ -54,7 +54,7 @@ export default function Results({ errors, originalText }: ResultsProps) {
           <h2 className="text-xl font-bold">수정된 텍스트</h2>
           <button
             onClick={handleCopy}
-            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors cursor-pointer"
           >
             클립보드에 복사
           </button>
