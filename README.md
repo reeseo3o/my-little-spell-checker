@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 한글 맞춤법 검사기 (Korean Spell Checker)
 
-## Getting Started
+## 소개
 
-First, run the development server:
+이 프로젝트는 Next.js를 기반으로 한 한글 맞춤법 검사기입니다. 부산대학교 한국어 맞춤법 검사기 API를 활용하여 텍스트의 맞춤법을 검사하고 교정 제안을 제공합니다.
 
+## 주요 기능
+
+- 실시간 텍스트 입력 및 맞춤법 검사
+- 오류가 있는 텍스트 하이라이팅
+- 교정 제안 및 설명 제공
+- 수정된 텍스트 클립보드 복사
+- 특수 문자 및 유니코드 처리
+- 반응형 디자인
+
+## 기술 스택
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+
+## 시작하기
+
+1. 저장소 클론
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/korean-spell-checker.git
+cd korean-spell-checker
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. 의존성 설치
+```bash
+npm install
+or
+yarn install
+or
+pnpm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. 개발 서버 실행
+```bash
+npm run dev
+or
+yarn dev
+or
+pnpm dev
+```
 
-## Learn More
+4. 브라우저에서 [http://localhost:3000](http://localhost:3000) 접속
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ❓ 자주 묻는 질문
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Q: 최대 몇 글자까지 검사할 수 있나요?
+A: 한 번에 최대 5000자까지 검사할 수 있습니다.
 
-## Deploy on Vercel
+### Q: API 호출 제한이 있나요?
+A: 부산대학교 맞춤법 검사기 API의 정책을 따릅니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 기여하기
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+## 🙏 감사의 글
+
+이 프로젝트는 부산대학교 한국어 맞춤법 검사기를 기반으로 만들어졌습니다.
