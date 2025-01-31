@@ -1,5 +1,6 @@
 'use client';
 
+import { sanitizeText } from '@/utils/common';
 import { useEffect, useRef, useState } from 'react';
 
 interface TextAreaProps {
@@ -54,7 +55,8 @@ export default function TextArea({ text, onTextChange, onCheck, isReadOnly }: Te
           placeholder="맞춤법을 검사할 텍스트를 입력하세요."
           value={text}
           onChange={(e) => {
-            onTextChange(e.target.value);
+            const sanitizedText = sanitizeText(e.target.value);
+            onTextChange(sanitizedText);
           }}
           readOnly={isReadOnly}
           maxLength={maxLength}

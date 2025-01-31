@@ -7,8 +7,6 @@ import { useSpellChecker } from "@/hooks/useSpellChecker";
 export default function Home() {
   const { text, errors, isChecked, handleCheck, handleTextChange } = useSpellChecker();
 
-
-
   // const testSpecialCharacters = async () => {
   //   // 유니코드 문자열 테스트 케이스
   //   const testCases = [
