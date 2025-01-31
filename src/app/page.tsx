@@ -1,59 +1,13 @@
 "use client"
 
-import { useState } from "react";
-import Results from "./components/Results";
-import TextArea from "./components/TextArea";
-import { ErrInfo } from "@/types/speller";
+import TextArea from "@/components/TextArea";
+import Results from "../components/Results";
+import { useSpellChecker } from "@/hooks/useSpellChecker";
 
 export default function Home() {
-  const [text, setText] = useState('');
-  const [errors, setErrors] = useState<ErrInfo[]>([]);
-  const [isChecked, setIsChecked] = useState(false);
+  const { text, errors, isChecked, handleCheck, handleTextChange } = useSpellChecker();
 
-  const handleCheck = async (newText: string) => {
-    if (isChecked) {
-      setText('');
-      setErrors([]);
-      setIsChecked(false);
-    } else {
-      setText(newText);
-      await checkSpelling(newText);
-      setIsChecked(true);
-    }
-  };
 
-  const handleTextChange = (newText: string) => {
-    if (!isChecked) {
-      setText(newText);
-    }
-  };
-
-  const checkSpelling = async (textToCheck: string) => {
-    try {
-      const response = await fetch('/api/spell-checker', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ text: textToCheck }),
-      });
-      
-      const data = await response.json();
-      setErrors(data.errors);
-      
-      // 모든 맞춤법 오류를 수정한 텍스트 생성
-      let correctedText = textToCheck;
-      // 순서대로 수정
-      for (const error of data.errors) {
-        correctedText = 
-          correctedText.slice(0, error.start) + 
-          error.candWord + 
-          correctedText.slice(error.end);
-      }
-    } catch (error) {
-      console.error('Error checking spelling:', error);
-    }
-  };
 
   // const testSpecialCharacters = async () => {
   //   // 유니코드 문자열 테스트 케이스

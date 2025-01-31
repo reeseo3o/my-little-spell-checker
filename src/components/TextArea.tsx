@@ -51,7 +51,7 @@ export default function TextArea({ text, onTextChange, onCheck, isReadOnly }: Te
             transition-all duration-300 ease-in-out transform
             ${isReadOnly ? 'cursor-not-allowed opacity-75 scale-99' : 'scale-100'}
             ${isTextTooLong ? 'border-red-500' : ''}`}
-          placeholder="맞춤법을 검사할 텍스트를 입력하세요..."
+          placeholder="맞춤법을 검사할 텍스트를 입력하세요."
           value={text}
           onChange={(e) => {
             onTextChange(e.target.value);

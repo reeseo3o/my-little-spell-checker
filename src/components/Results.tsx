@@ -1,7 +1,7 @@
- 'use client';
+'use client';
 
 import { ErrInfo } from '@/types/speller';
-import { htmlToString } from '@/utils/html';
+import { getCorrectedText, htmlToString } from '../utils/common';
 
 interface ResultsProps {
   errors: ErrInfo[];
@@ -11,6 +11,8 @@ interface ResultsProps {
 export default function Results({ errors, originalText }: ResultsProps) {
   if (!errors || errors.length === 0) return null;
 
+
+
   const renderText = () => {
     const result = [];
     let lastIndex = 0;
@@ -18,12 +20,9 @@ export default function Results({ errors, originalText }: ResultsProps) {
     errors.forEach((error) => {
       result.push(originalText.slice(lastIndex, error.start));
       
-      const errorText = originalText.slice(error.start, error.end);
-      const punctuation = errorText.match(/[^\w\s]$/)?.[0] || '';
-      
       result.push(
         <span key={error.start} className="bg-green-200 dark:bg-green-900 px-1 rounded">
-          {error.candWord + punctuation}
+          {error.candWord}
         </span>
       );
       lastIndex = error.end;
@@ -35,14 +34,7 @@ export default function Results({ errors, originalText }: ResultsProps) {
 
   const handleCopy = async () => {
     try {
-      let correctedText = originalText;
-      errors.forEach((error) => {
-        correctedText = 
-          correctedText.slice(0, error.start) + 
-          error.candWord + 
-          correctedText.slice(error.end);
-      });
-      
+      const correctedText = getCorrectedText(originalText, errors);
       await navigator.clipboard.writeText(correctedText);
       alert('수정된 텍스트가 클립보드에 복사되었습니다.');
     } catch (err) {
