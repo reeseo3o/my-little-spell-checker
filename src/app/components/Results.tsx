@@ -17,9 +17,13 @@ export default function Results({ errors, originalText }: ResultsProps) {
 
     errors.forEach((error) => {
       result.push(originalText.slice(lastIndex, error.start));
+      
+      const errorText = originalText.slice(error.start, error.end);
+      const punctuation = errorText.match(/[^\w\s]$/)?.[0] || '';
+      
       result.push(
         <span key={error.start} className="bg-green-200 dark:bg-green-900 px-1 rounded">
-          {error.candWord}
+          {error.candWord + punctuation}
         </span>
       );
       lastIndex = error.end;
