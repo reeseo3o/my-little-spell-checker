@@ -3,7 +3,7 @@ import { ErrInfo } from '@/types/speller';
 
 export const useSpellChecker = () => {
   const [text, setText] = useState('');
-  const [errors, setErrors] = useState<ErrInfo[]>([]);
+  const [errors, setErrors] = useState<ErrInfo[] | null>(null);
   const [isChecked, setIsChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -30,7 +30,7 @@ export const useSpellChecker = () => {
   const handleCheck = async (newText: string) => {
     if (isChecked) {
       setText('');
-      setErrors([]);
+      setErrors(null);
       setIsChecked(false);
     } else {
       setText(newText);

@@ -11,7 +11,7 @@ interface TextAreaProps {
 }
 
 export default function TextArea({ text, onTextChange, onCheck, isReadOnly }: TextAreaProps) {
-  const maxLength = 5000; // 최대 글자수 제한
+  const maxLength = 5000; 
   const isTextEmpty = text.trim().length === 0;
   const isTextTooLong = text.length > maxLength;
   const isButtonDisabled = !isReadOnly && (isTextEmpty || isTextTooLong);

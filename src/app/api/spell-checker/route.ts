@@ -42,12 +42,18 @@ export async function POST(request: Request) {
 
         const responseText = await response.text();
         
+        // 맞춤법 오류를 찾지 못한 경우 체크
+        if (responseText.includes('맞춤법과 문법 오류를 찾지 못했습니다')) {
+            return NextResponse.json({ errors: [] });
+        }
+        
         // 데이터 추출을 위한 정규식 패턴
-        const dataPattern = /data = (\[[\s\S]*?\]);/;
+        const dataPattern = /data\s*=\s*(\[[\s\S]*?\])\s*;/;
         const match = responseText.match(dataPattern);
         
         if (!match) {
             console.log('데이터 패턴 매칭 실패');
+            console.log('Response Text:', responseText);
             return NextResponse.json({ errors: [] });
         }
 
