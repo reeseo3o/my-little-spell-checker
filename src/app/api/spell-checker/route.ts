@@ -3,9 +3,15 @@ import { NextResponse } from 'next/server';
 
 function encodeFormData(data: Record<string, string>): string {
     return Object.entries(data)
-        .map(([key, value]) => 
-            encodeURIComponent(key) + '=' + encodeURIComponent(value)
-        )
+        .map(([key, value]) => {
+            // 특수 문자 및 유니코드 문자 처리
+            const encodedValue = value
+                .replace(/\n/g, "\r")  // 줄바꿈 문자 변환
+                .replace(/[\uFFFD]/g, '') // U+FFFD 문자 제거
+                .replace(/[\u{10000}-\u{10FFFF}]/gu, ''); // 특수 유니코드 문자 제거
+                
+            return `${encodeURIComponent(key)}=${encodeURIComponent(encodedValue)}`;
+        })
         .join('&');
 }
 
@@ -35,20 +41,31 @@ export async function POST(request: Request) {
         });
 
         const responseText = await response.text();
-        const startIndex = responseText.indexOf("data = [{");
-        const nextIndex = responseText.indexOf("}];");
-        const rawData = responseText.substring(startIndex + 7, nextIndex + 2);
-        const errorData = JSON.parse(rawData);
+        
+        // 데이터 추출을 위한 정규식 패턴
+        const dataPattern = /data = (\[[\s\S]*?\]);/;
+        const match = responseText.match(dataPattern);
+        
+        if (!match) {
+            console.log('데이터 패턴 매칭 실패');
+            return NextResponse.json({ errors: [] });
+        }
 
-        const errors = errorData[0]?.errInfo?.map((match: SpellError) => ({
-            start: match.start,
-            end: match.end,
-            help: match.help,
-            candWord: match.candWord,
-            orgStr: match.orgStr
-        })) || [];
+        try {
+            const errorData = JSON.parse(match[1]);
+            const errors = errorData[0]?.errInfo?.map((match: SpellError) => ({
+                start: match.start,
+                end: match.end,
+                help: match.help,
+                candWord: match.candWord,
+                orgStr: match.orgStr
+            })) || [];
 
-        return NextResponse.json({ errors });
+            return NextResponse.json({ errors });
+        } catch (parseError) {
+            console.error('JSON 파싱 에러:', parseError);
+            return NextResponse.json({ errors: [] });
+        }
     } catch (error) {
         console.error('Spell check error:', error);
         return NextResponse.json(
