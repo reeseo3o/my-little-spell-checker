@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-2xl font-bold">한글 맞춤법 검사기</h1>
+      <h1 className="text-2xl font-bold">한국어 맞춤법 검사기</h1>
       <div className="w-full flex flex-col items-center gap-8 py-8">
         <TextArea
           text={text}

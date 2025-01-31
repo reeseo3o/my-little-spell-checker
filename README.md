@@ -1,4 +1,4 @@
-# 한글 맞춤법 검사기 (Korean Spell Checker)
+# 한국어 맞춤법 검사기 (Korean Spell Checker)
 
 ## 소개
 
@@ -6,7 +6,7 @@
   <video src="https://github.com/user-attachments/assets/918cf479-d3ec-4881-9c68-df140caea838" />
 </div>
 
-이 프로젝트는 Next.js를 기반으로 한 한글 맞춤법 검사기입니다. 부산대학교 한국어 맞춤법 검사기 API를 활용하여 텍스트의 맞춤법을 검사하고 교정 제안을 제공합니다.
+이 프로젝트는 Next.js를 기반으로 한 한국어 맞춤법 검사기입니다. 부산대학교 한국어 맞춤법 검사기 API를 활용하여 텍스트의 맞춤법을 검사하고 교정 제안을 제공합니다.
 
 ## 주요 기능
 
