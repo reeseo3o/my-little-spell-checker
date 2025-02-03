@@ -59,9 +59,6 @@ pnpm dev
 ### Q: 최대 몇 글자까지 검사할 수 있나요?
 A: 한 번에 최대 5000자까지 검사할 수 있습니다.
 
-### Q: API 호출 제한이 있나요?
-A: 부산대학교 맞춤법 검사기 API의 정책을 따릅니다.
-
 
 ## 기여하기
 
@@ -71,7 +68,5 @@ A: 부산대학교 맞춤법 검사기 API의 정책을 따릅니다.
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-## 🙏 감사의 글
 
 이 프로젝트는 부산대학교 한국어 맞춤법 검사기를 기반으로 만들어졌습니다.
