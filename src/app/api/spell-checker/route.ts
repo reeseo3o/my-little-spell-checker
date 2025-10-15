@@ -32,7 +32,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ errors: [] });
         }
 
-        const response = await fetch("http://speller.cs.pusan.ac.kr/results", {
+        const response = await fetch("https://nara-speller.co.kr/old_speller/results", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
