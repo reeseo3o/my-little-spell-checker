@@ -1,6 +1,6 @@
 # 한국어 맞춤법 검사기 (Korean Spell Checker)
 
-> **⚠️ DEPRECATED (2025년 1월)**
+> **⚠️ DEPRECATED (2026년 1월)**
 > 
 > 이 프로젝트가 사용하던 nara-speller.co.kr API가 변경되어 더 이상 서비스를 제공하지 않습니다.
 > 
