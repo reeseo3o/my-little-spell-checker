@@ -1,5 +1,11 @@
 # 한국어 맞춤법 검사기 (Korean Spell Checker)
 
+> **⚠️ DEPRECATED (2025년 1월)**
+> 
+> 이 프로젝트가 사용하던 nara-speller.co.kr API가 변경되어 더 이상 서비스를 제공하지 않습니다.
+> 
+> **대안**: [nara-speller.co.kr](https://nara-speller.co.kr/speller/)에서 직접 사용해주세요.
+
 ## 소개
 
 <div align="center">
